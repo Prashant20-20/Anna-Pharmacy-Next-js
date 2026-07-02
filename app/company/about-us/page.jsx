@@ -307,7 +307,8 @@ function ParallaxBanner({ src, alt, children, height = "md:h-[470px]", overlay =
   return (
     <div ref={ref} className={`bg-[#3a3a3a] h-[200px] ${height} overflow-hidden relative`}>
       <div ref={imgRef} className="absolute inset-0" style={{ willChange: "transform" }}>
-        <img src={src} alt={alt} className={`w-full h-full object-cover ${overlay ? "opacity-90" : ""}`} />
+        <img src={src} alt={alt} loading="eager"
+  fetchPriority="high" className={`w-full h-full object-cover ${overlay ? "opacity-90" : ""}`} />
       </div>
       {children}
     </div>
@@ -315,18 +316,9 @@ function ParallaxBanner({ src, alt, children, height = "md:h-[470px]", overlay =
 }
 
 function HeroTitle() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => { setTimeout(() => setVisible(true), 200); }, []);
   return (
     <div className="h-[60px] md:h-[470px] flex items-center flex-row w-full px-6 md:px-12 absolute top-[120px] md:top-0 md:bg-black/10">
-      <h1
-        className="text-4xl md:text-[65px] text-white font-extralight"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(30px)",
-          transition: "opacity 1s ease 0.3s, transform 1s cubic-bezier(0.22,1,0.36,1) 0.3s",
-        }}
-      >
+      <h1 className="text-4xl md:text-[65px] text-white font-extralight">
         <span className="font-bold">About</span> Us
       </h1>
     </div>
